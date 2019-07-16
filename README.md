@@ -1,1 +1,1 @@
-A simple application that exposes and http endpoint to look up the share price.
+A simple application that exposes an http endpoint to look up the share price.
