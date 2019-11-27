@@ -46,7 +46,7 @@ namespace check_share_price
 
         private async Task<ShareModel> GetShareInfo(string symbol)
         {
-            var stockPriceUrl = $"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apiKey={_apiKey}";
+            var stockPriceUrl = $"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={_apiKey}";
             var result = await _client.GetAsync(stockPriceUrl);
             var jsonString = await result.Content.ReadAsStringAsync();
             var jsonObject = (JObject)JsonConvert.DeserializeObject(jsonString);
