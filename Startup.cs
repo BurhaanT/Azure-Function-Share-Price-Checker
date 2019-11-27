@@ -18,7 +18,6 @@ namespace check_share_price
 
         }
 
-
         public override void Configure(IFunctionsHostBuilder builder)
         {
             var localRoot = Environment.GetEnvironmentVariable("AzureWebJobsScriptRoot");

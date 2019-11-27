@@ -21,16 +21,12 @@ namespace check_share_price
     public class CheckPrice
     {
         private readonly HttpClient _client;
-        private readonly IConfiguration _config;
         private readonly string _apiKey;
-        private readonly string _stockPriceUrl;
 
         public CheckPrice(IHttpClientFactory httpClientFactory, IConfiguration config)
         {
             _client = httpClientFactory.CreateClient();
-            _config = config;
-            _apiKey = _config["StockTickerApiKey"];
-            _stockPriceUrl = $"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apiKey={_apiKey}";
+            _apiKey = config["StockTickerApiKey"];
         }
 
         [FunctionName("GetPrices")]
@@ -50,7 +46,8 @@ namespace check_share_price
 
         private async Task<ShareModel> GetShareInfo(string symbol)
         {
-            var result = await _client.GetAsync(_stockPriceUrl);
+            var stockPriceUrl = $"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apiKey={_apiKey}";
+            var result = await _client.GetAsync(stockPriceUrl);
             var jsonString = await result.Content.ReadAsStringAsync();
             var jsonObject = (JObject)JsonConvert.DeserializeObject(jsonString);
             var globalQuote = jsonObject["Global Quote"];
