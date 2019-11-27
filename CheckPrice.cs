@@ -43,7 +43,7 @@ namespace check_share_price
             if (string.IsNullOrEmpty(share))
                 return new BadRequestErrorMessageResult("A 'share' needs to be passed in!");
 
-            var shareInfo = await GetShareInfo(share));
+            var shareInfo = await GetShareInfo(share);
 
             return new OkObjectResult(shareInfo);
         }
